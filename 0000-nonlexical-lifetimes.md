@@ -1310,13 +1310,13 @@ uses a (incorrect, but declared as unsafe) API for spawning threads:
 
 ```rust
 let scope = Scope::new();
-let mut foo = 22;
+let mut foo = true;
 
 unsafe {
     // dtor joins the thread
     let _guard = scope.spawn(&mut foo);
     loop {
-        foo += 1;
+        foo = !foo;
     }
     // drop of `_guard` joins the thread
 }
